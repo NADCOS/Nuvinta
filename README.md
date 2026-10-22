@@ -1,10 +1,18 @@
 # Nuvìnta Cafe by Totoy Brown Tambayan — Brand & Business Proposal
 
-Single-file website. `index.html` is fully self-contained (fonts, logos and images are embedded).
+## What to upload
+Upload EVERYTHING in this folder to the root of the repo, keeping the folder structure:
+
+```
+index.html
+README.md
+assets/
+  photos/   (9 zone & area photos)
+  *.jpg / *.png  (logos)
+```
+
+Drag the whole `assets` folder (not just its files) into GitHub's upload page so the path stays `assets/photos/...`.
 
 ## Publish with GitHub Pages
-1. Create a new repository on GitHub (e.g. `nuvinta-cafe`).
-2. Upload `index.html` (and this README) to the root of the repo.
-3. Go to **Settings → Pages**.
-4. Under **Build and deployment**, set Source to **Deploy from a branch**, Branch **main**, folder **/ (root)**, then **Save**.
-5. After a minute your preview is live at `https://<your-username>.github.io/nuvinta-cafe/`.
+Settings → Pages → Deploy from a branch → `main` / `(root)` → Save.
+Live at `https://nadcos.github.io/Nuvinta/`.
