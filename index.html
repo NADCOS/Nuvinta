@@ -74,13 +74,33 @@ a:hover{color:#2B1D14}
         <button onClick="{{ setEN }}" aria-pressed="{{ isEN }}" style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;min-height:40px;min-width:40px;padding:0 10px;border:none;cursor:pointer;background:{{ enBg }};color:{{ enFg }};transition:background .2s">EN</button>
         <button onClick="{{ setTL }}" aria-pressed="{{ isTL }}" style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;min-height:40px;min-width:40px;padding:0 10px;border:none;border-left:1.5px solid #2B1D14;cursor:pointer;background:{{ tlBg }};color:{{ tlFg }};transition:background .2s">TL</button>
       </div>
-      <a href="#closing" style="flex:none;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:#B8432F;color:#F5EEDF;padding:12px 16px;border-radius:2px;box-shadow:3px 3px 0 #2B1D14;transition:transform .2s, box-shadow .2s" style-hover="transform:translate(-2px,-2px);box-shadow:5px 5px 0 #2B1D14;color:#F5EEDF">{{ ctaLabel }}</a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <a href="#closing" style="flex:none;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:#B8432F;color:#F5EEDF;padding:12px 16px;border-radius:2px;box-shadow:3px 3px 0 #2B1D14;transition:transform .2s, box-shadow .2s" style-hover="transform:translate(-2px,-2px);box-shadow:5px 5px 0 #2B1D14;color:#F5EEDF">Join the Tambayan</a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="{{ burgerAria }}" aria-expanded="{{ menuOpen }}" style="width:44px;height:44px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1.5px solid #2B1D14;border-radius:2px;background:{{ burgerBg }};cursor:pointer;padding:0">
+        <span style="width:20px;height:2px;background:{{ burgerFg }};transform:{{ burgerT1 }};transition:transform .25s"></span>
+        <span style="width:20px;height:2px;background:#B8432F;opacity:{{ burgerMidOp }};transition:opacity .2s"></span>
+        <span style="width:20px;height:2px;background:{{ burgerFg }};transform:{{ burgerT3 }};transition:transform .25s"></span>
+      </button>
+      </sc-if>
     </div>
   </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid rgba(43,29,20,0.14);background:#F5EEDF;padding:6px 16px 18px;max-height:calc(100svh - 140px);overflow-y:auto;box-shadow:0 12px 24px rgba(43,29,20,0.18)">
+      <sc-for list="{{ rail }}" as="r" hint-placeholder-count="9">
+        <a href="{{ r.href }}" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:12px;padding:13px 4px;border-bottom:1px dashed rgba(43,29,20,0.3);color:#2B1D14">
+          <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#B8432F;min-width:22px">{{ r.num }}</span>
+          <span style="font-family:'Young Serif',serif;font-size:21px">{{ r.title }}</span>
+        </a>
+      </sc-for>
+      <a href="#closing" onClick="{{ closeMenu }}" style="display:block;margin-top:16px;text-align:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:#B8432F;color:#F5EEDF;padding:16px;border-radius:2px;box-shadow:3px 3px 0 #2B1D14">Join the Tambayan</a>
+    </div>
+  </sc-if>
   <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
   <div style="max-width:1200px;margin:0 auto;padding:0 20px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
     <sc-for list="{{ rail }}" as="r" hint-placeholder-count="8">
-      <a href="{{ r.href }}" style="flex:none;display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px;border:1px solid rgba(43,29,20,0.25);background:{{ r.bg }};color:{{ r.fg }};white-space:nowrap;transition:background .2s, color .2s" style-hover="border-color:#2B1D14">
+      <a href="{{ r.href }}" style="flex:none;display:flex;align-items:center;gap:5px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:5px 8px;border-radius:2px;border:1px solid rgba(43,29,20,0.25);background:{{ r.bg }};color:{{ r.fg }};white-space:nowrap;transition:background .2s, color .2s" style-hover="border-color:#2B1D14">
         <span style="color:{{ r.numColor }}">{{ r.num }}</span>{{ r.title }}
       </a>
     </sc-for>
@@ -925,7 +945,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     const R = '#B8432F', M = '#D9A42B', T = '#2F6B66', B = '#2B1D14';
-    const isMobile = this.state.w < 820;
+    const isMobile = this.state.w < 1024;
     const contents = [
       ['01','Executive Summary','#summary'],['02','Brand Identity & Concept','#brand'],['03','The Nostalgia Experience','#experience'],['04','Target Market Analysis','#market'],
       ['05','Proposed Menu Concept','#menu'],['06','Marketing & Launch Strategy','#launch'],['07','Future Vision','#vision'],['08','Logo & Visual Identity','#identity'],
@@ -1212,7 +1232,15 @@ class Component extends DCLogic {
     const sections = [['01','Summary','summary'],['02','Brand','brand'],['03','Experience','experience'],['04','Market','market'],['05','Menu','menu'],['06','Launch','launch'],['07','Vision','vision'],['08','Identity','identity'],['09','Visit','visit']];
     const act = S.activeSection;
     return {
-      ctaLabel: d.isMobile ? 'Join' : 'Join the Tambayan',
+      ctaLabel: 'Join the Tambayan',
+      menuOpen: d.isMobile && !!S.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      burgerAria: S.menuOpen ? 'Close menu' : 'Open menu',
+      burgerBg: S.menuOpen ? B : 'transparent', burgerFg: S.menuOpen ? C : B,
+      burgerT1: S.menuOpen ? 'translateY(7px) rotate(45deg)' : 'none',
+      burgerT3: S.menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
+      burgerMidOp: S.menuOpen ? 0 : 1,
       isEN: S.lang !== 'tl', isTL: S.lang === 'tl',
       enBg: S.lang !== 'tl' ? B : 'transparent', enFg: S.lang !== 'tl' ? C : B,
       tlBg: S.lang === 'tl' ? B : 'transparent', tlFg: S.lang === 'tl' ? C : B,
