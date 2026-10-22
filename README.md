@@ -8,10 +8,10 @@ support.js
 image-slot.js
 nuvinta-tl.js
 README.md
-assets/   (whole folder: logos, photos/, visuals/, mockups/)
+img/   (whole folder: logos, photos/, visuals/, mockups/)
 ```
 
-Drag the whole `assets` folder (not only its files) so paths stay like `assets/mockups/a1-tray.jpg`.
+The old `assets/` folder is no longer used — you can delete it from the repo.
 
 ## GitHub Pages
 Settings → Pages → Deploy from a branch → `main` / `(root)` → Save.

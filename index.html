@@ -12,15 +12,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
 <script src="./nuvinta-tl.js"></script>
-<meta name="ext-resource-dependency" content="assets/photos/zone-pitstop.webp">
-<meta name="ext-resource-dependency" content="assets/photos/zone-letitrip.webp">
-<meta name="ext-resource-dependency" content="assets/photos/zone-hoops.webp">
-<meta name="ext-resource-dependency" content="assets/photos/zone-lounge.webp">
-<meta name="ext-resource-dependency" content="assets/photos/zone-crushring.webp">
-<meta name="ext-resource-dependency" content="assets/photos/area-kanto.webp">
-<meta name="ext-resource-dependency" content="assets/photos/area-bakuran.webp">
-<meta name="ext-resource-dependency" content="assets/photos/area-silong.webp">
-<meta name="ext-resource-dependency" content="assets/photos/area-bench.webp">
+<meta name="ext-resource-dependency" content="img/photos/zone-pitstop.webp">
+<meta name="ext-resource-dependency" content="img/photos/zone-letitrip.webp">
+<meta name="ext-resource-dependency" content="img/photos/zone-hoops.webp">
+<meta name="ext-resource-dependency" content="img/photos/zone-lounge.webp">
+<meta name="ext-resource-dependency" content="img/photos/zone-crushring.webp">
+<meta name="ext-resource-dependency" content="img/photos/area-kanto.webp">
+<meta name="ext-resource-dependency" content="img/photos/area-bakuran.webp">
+<meta name="ext-resource-dependency" content="img/photos/area-silong.webp">
+<meta name="ext-resource-dependency" content="img/photos/area-bench.webp">
 <style>
 html{scroll-behavior:smooth;scroll-padding-top:120px}
 body{margin:0;background:#F5EEDF;color:#2B1D14;font-family:'Work Sans',sans-serif;-webkit-font-smoothing:antialiased}
@@ -65,9 +65,9 @@ a:hover{color:#2B1D14}
 <header style="position:sticky;top:0;z-index:50;background:#F5EEDF;border-bottom:1px solid rgba(43,29,20,0.14)">
   <div style="max-width:1200px;margin:0 auto;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px">
     <a href="#top" style="display:flex;align-items:center;gap:clamp(8px,2.5vw,14px);min-width:0">
-      <img src="assets/totoy-brown-logo.jpg" alt="Totoy Brown Tambayan" style="height:clamp(40px,11vw,52px);width:clamp(40px,11vw,52px);object-fit:contain;display:block;border-radius:4px;flex:none">
+      <img src="img/totoy-brown-logo.jpg" alt="Totoy Brown Tambayan" style="height:clamp(40px,11vw,52px);width:clamp(40px,11vw,52px);object-fit:contain;display:block;border-radius:4px;flex:none">
       <span style="width:1px;height:32px;background:rgba(43,29,20,0.25);flex:none"></span>
-      <img src="assets/nuvinta-wordmark.png" alt="Nuvìnta Cafe by Totoy Brown Tambayan" style="height:clamp(30px,8vw,42px);width:auto;max-width:42vw;object-fit:contain;display:block">
+      <img src="img/nuvinta-wordmark.png" alt="Nuvìnta Cafe by Totoy Brown Tambayan" style="height:clamp(30px,8vw,42px);width:auto;max-width:42vw;object-fit:contain;display:block">
     </a>
     <div style="display:flex;align-items:center;gap:8px;flex:none">
       <div role="group" aria-label="Language" style="display:flex;border:1.5px solid #2B1D14;border-radius:2px;overflow:hidden">
@@ -77,6 +77,7 @@ a:hover{color:#2B1D14}
       <a href="#closing" style="flex:none;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:#B8432F;color:#F5EEDF;padding:12px 16px;border-radius:2px;box-shadow:3px 3px 0 #2B1D14;transition:transform .2s, box-shadow .2s" style-hover="transform:translate(-2px,-2px);box-shadow:5px 5px 0 #2B1D14;color:#F5EEDF">{{ ctaLabel }}</a>
     </div>
   </div>
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
   <div style="max-width:1200px;margin:0 auto;padding:0 20px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
     <sc-for list="{{ rail }}" as="r" hint-placeholder-count="8">
       <a href="{{ r.href }}" style="flex:none;display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px;border:1px solid rgba(43,29,20,0.25);background:{{ r.bg }};color:{{ r.fg }};white-space:nowrap;transition:background .2s, color .2s" style-hover="border-color:#2B1D14">
@@ -84,6 +85,7 @@ a:hover{color:#2B1D14}
       </a>
     </sc-for>
   </div>
+  </sc-if>
   <div style="height:3px;background:rgba(43,29,20,0.08)">
     <div style="height:100%;width:{{ scrollWidth }};background:linear-gradient(90deg,#B8432F 0 25%,#D9A42B 25% 50%,#2F6B66 50% 75%,#2B1D14 75%);background-size:400px 100%"></div>
   </div>
@@ -116,18 +118,18 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- DAY TO NIGHT -->
-<section id="preview" data-screen-label="Day to Night" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px 0">
+<section id="preview" data-screen-label="Day to Night" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px 0">
   <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px">
     <div>
       <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">First look · Concept render</p>
-      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0">From merienda to midnight</h2>
+      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0">From merienda to midnight</h2>
     </div>
     <p style="font-size:15.5px;line-height:1.55;margin:0;max-width:420px">Drag the slider to see the tambayan go from a bright afternoon to a string-lit night.</p>
   </div>
   <div style="position:relative;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:#2B1D14;box-shadow:8px 8px 0 #2B1D14">
-    <img src="assets/visuals/cafe-day.jpg" alt="Nuvìnta Cafe concept render in the afternoon" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
-    <img src="assets/visuals/cafe-golden.jpg" alt="Nuvìnta Cafe concept render at golden hour" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ goldenOpacity }};transition:opacity .25s linear">
-    <img src="assets/visuals/cafe-night.jpg" alt="Nuvìnta Cafe concept render at night" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ nightOpacity }};transition:opacity .25s linear">
+    <img src="img/visuals/cafe-day.jpg" alt="Nuvìnta Cafe concept render in the afternoon" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    <img src="img/visuals/cafe-golden.jpg" alt="Nuvìnta Cafe concept render at golden hour" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ goldenOpacity }};transition:opacity .25s linear">
+    <img src="img/visuals/cafe-night.jpg" alt="Nuvìnta Cafe concept render at night" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ nightOpacity }};transition:opacity .25s linear">
     <div style="position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:8px;background:rgba(43,29,20,0.82);color:#F5EEDF;padding:8px 12px;border-radius:2px;pointer-events:none">
       <span style="width:10px;height:10px;border-radius:50%;background:{{ dnDot }}"></span>
       <span style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em">{{ dnTime }}</span>
@@ -143,11 +145,11 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- 01 -->
-<section id="summary" data-screen-label="01 Executive Summary" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+<section id="summary" data-screen-label="01 Executive Summary" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px 56px;align-items:start">
     <div>
       <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">01 · Executive Summary</p>
-      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:20px">The kanto, given the setting it deserved.</h2>
+      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:20px">The kanto, given the setting it deserved.</h2>
       <p style="font-size:17px;line-height:1.65;margin:0 0 14px;text-wrap:pretty">Every Filipino who grew up in the 90s remembers the kanto: the sari-sari store bench, the Sunday-morning pandesal run, the barkada that gathered under a streetlight with nothing to do and nowhere better to be. That corner was where friendships were made. It was never comfortable, and it was never designed. It just worked.</p>
       <sc-if value="{{ summaryMore }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.65;margin-bottom:14px">
@@ -178,9 +180,9 @@ a:hover{color:#2B1D14}
 
 <!-- 02 -->
 <section id="brand" data-screen-label="02 Brand Identity" style="background:#EFE4CC">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
     <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">02 · Brand Identity &amp; Concept</p>
-    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:16px">Where premium meets the kanto</h2>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:16px">Where premium meets the kanto</h2>
     <p style="font-size:17px;line-height:1.65;max-width:760px;margin:0 0 28px;text-wrap:pretty">The brand works because its two halves pull in opposite directions and meet in the middle. Nuvìnta sounds European, considered and premium; the accented ì signals craft. Totoy Brown is unmistakably local: the familiar nickname of the neighborhood kid, the color of barako coffee and pandesal crust. Together they promise elevated quality without pretension.</p>
     <div style="border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:#F5EEDF">
       <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
@@ -246,9 +248,9 @@ a:hover{color:#2B1D14}
 
 <!-- 03 -->
 <section id="experience" data-screen-label="03 Nostalgia Experience" style="background:#2B1D14;color:#F5EEDF">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
     <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#D9A42B">03 · The Nostalgia Experience</p>
-    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:16px">Pick a zone. Play the 90s.</h2>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:16px">Pick a zone. Play the 90s.</h2>
     <p style="font-size:17px;line-height:1.65;max-width:760px;margin:0 0 32px;text-wrap:pretty">For a 90s kid, the best afternoons were spent at a friend's house racing Tamiya cars down the hallway, arguing over whose Beyblade spun longest, and rushing home in time for the next episode of Ghost Fighter. Nuvìnta rebuilds those afternoons as dedicated play zones around the Bakuran, each sized for groups and designed to be watched as much as played.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;align-items:stretch">
       <div style="display:flex;flex-direction:column;gap:6px">
@@ -297,9 +299,9 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- TOURNAMENTS -->
-<section id="tournaments" data-screen-label="03 Tournaments" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+<section id="tournaments" data-screen-label="03 Tournaments" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
   <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">03 · Community</p>
-  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:12px">Weekend mini-tournaments</h2>
+  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:12px">Weekend mini-tournaments</h2>
   <p style="font-size:16.5px;line-height:1.6;max-width:720px;margin:0 0 24px">Tournaments are the engine of the community. A recurring weekend schedule gives regulars a fixed date to plan around and fills the cafe during its highest-value hours.</p>
   <div style="border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:#FBF6EC">
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -337,9 +339,9 @@ a:hover{color:#2B1D14}
 
 <!-- 04 -->
 <section id="market" data-screen-label="04 Target Market" style="background:#EFE4CC">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
     <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">04 · Target Market Analysis</p>
-    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:24px">Who comes to the kanto</h2>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:24px">Who comes to the kanto</h2>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
       <sc-for list="{{ profileTabs }}" as="t" hint-placeholder-count="3">
         <button onClick="{{ t.onClick }}" style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:44px;padding:10px 14px;border-radius:2px;cursor:pointer;transition:background .2s, color .2s, transform .15s;border:1.5px solid #2B1D14;background:{{ t.bg }};color:{{ t.fg }}" style-hover="background:#D9A42B;color:#2B1D14">{{ t.name }}</button>
@@ -397,9 +399,9 @@ a:hover{color:#2B1D14}
 
 <!-- 05 -->
 <section id="menu" data-screen-label="05 Menu" style="background:#2F6B66;color:#F5EEDF">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
     <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#D9A42B">05 · Proposed Menu Concept</p>
-    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">Kape at Merienda</h2>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">Kape at Merienda</h2>
     <p style="font-size:16.5px;line-height:1.6;max-width:760px;margin:0 0 24px;text-wrap:pretty">The menu follows the same rule as the space: modern craft as the foundation, nostalgia as the flavor. Coffee is built on locally sourced Philippine beans, with Batangas Barako as the house signature. Prices below are indicative and should be validated against local competition and food-cost targets.</p>
     <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;scrollbar-width:thin">
       <sc-for list="{{ allMenuTabs }}" as="t" hint-placeholder-count="6">
@@ -427,11 +429,11 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- 06 -->
-<section id="launch" data-screen-label="06 Marketing & Launch" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+<section id="launch" data-screen-label="06 Marketing & Launch" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 48px;align-items:end;margin-bottom:32px">
     <div>
       <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">06 · Marketing &amp; Launch Strategy</p>
-      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0">"Balik-Tambay."</h2>
+      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0">"Balik-Tambay."</h2>
     </div>
     <p style="font-size:17px;line-height:1.6;margin:0">Come back to the kanto, now with better coffee. Every touchpoint should feel like a message from your childhood, delivered in a modern voice.</p>
   </div>
@@ -532,9 +534,9 @@ a:hover{color:#2B1D14}
 
 <!-- 07 -->
 <section id="vision" data-screen-label="07 Future Vision" style="background:#2B1D14;color:#F5EEDF">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
     <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#D9A42B">07 · Future Vision</p>
-    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">A family of brands</h2>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">A family of brands</h2>
     <p style="font-size:16.5px;line-height:1.6;max-width:760px;margin:0 0 28px;text-wrap:pretty">This first branch is a proof of concept for a larger idea: that Filipino nostalgia, delivered with modern standards, can scale. Nuvìnta positions Totoy Brown Tambayan as a family of brands rather than a single store.</p>
     <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:12px">
       <sc-for list="{{ yearSteps }}" as="y" hint-placeholder-count="3">
@@ -571,19 +573,36 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- 08 -->
-<section id="identity" data-screen-label="08 Logo & Visual Identity" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+<section id="identity" data-screen-label="08 Logo & Visual Identity" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
   <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">08 · Logo &amp; Visual Identity</p>
-  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">The marks</h2>
+  <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0;margin-bottom:14px">The marks</h2>
   <p style="font-size:16.5px;line-height:1.6;max-width:760px;margin:0 0 24px;text-wrap:pretty">The Nuvìnta identity applies the New Vintage idea to every mark: shapes and textures from 90s Filipino street signage, drawn with the restraint of a modern specialty brand. It is designed to look at home on a hand-painted kanto sign and on a premium cup sleeve.</p>
+  <div style="border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;margin-bottom:32px">
+    <div style="padding:12px 18px;background:#2B1D14;color:#F5EEDF;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Name options · Undecided</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#D9A42B">{{ nameVoteNote }}</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))">
+      <sc-for list="{{ nameOptions }}" as="o" hint-placeholder-count="2">
+        <div style="padding:clamp(18px,3vw,26px);display:flex;flex-direction:column;gap:10px;background:{{ o.bg }};border-right:1px solid rgba(43,29,20,0.15);border-bottom:1px solid rgba(43,29,20,0.15)">
+          <p style="font-family:'Young Serif',serif;font-size:clamp(30px,4vw,40px);line-height:1;margin:0">{{ o.name }}</p>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#B8432F;margin:0">{{ o.meaning }}</p>
+          <p style="font-size:15px;line-height:1.55;margin:0">{{ o.feel }}</p>
+          <p style="font-size:14px;line-height:1.5;margin:0;color:#4E3B2D"><strong>Used in:</strong> {{ o.used }}</p>
+          <button onClick="{{ o.onPick }}" style="align-self:flex-start;margin-top:4px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:44px;padding:0 16px;border:1.5px solid #2B1D14;border-radius:2px;cursor:pointer;background:{{ o.btnBg }};color:{{ o.btnFg }};transition:background .2s">{{ o.btnLabel }}</button>
+        </div>
+      </sc-for>
+    </div>
+  </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;align-items:start">
     <a href="{{ logoActive.src }}" target="_blank" style="grid-column:span 2;min-width:0;display:block;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:{{ logoActive.bg }};color:#2B1D14">
       <div role="img" aria-label="{{ logoActive.title }}" style="position:relative;aspect-ratio:4/3">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:10%;opacity:{{ lo0 }};transition:opacity .35s"><img src="assets/nuvinta-wordmark.png" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:4%;opacity:{{ lo1 }};transition:opacity .35s"><img src="assets/totoy-brown-logo.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo2 }};transition:opacity .35s"><img src="assets/logo-concept-a.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo3 }};transition:opacity .35s"><img src="assets/logo-concept-b.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo4 }};transition:opacity .35s"><img src="assets/logo-identity-v2.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo5 }};transition:opacity .35s"><img src="assets/logo-concept-d.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:10%;opacity:{{ lo0 }};transition:opacity .35s"><img src="img/nuvinta-wordmark.png" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:4%;opacity:{{ lo1 }};transition:opacity .35s"><img src="img/totoy-brown-logo.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo2 }};transition:opacity .35s"><img src="img/logo-concept-a.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo3 }};transition:opacity .35s"><img src="img/logo-concept-b.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo4 }};transition:opacity .35s"><img src="img/logo-identity-v2.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0;opacity:{{ lo5 }};transition:opacity .35s"><img src="img/logo-concept-d.jpg" alt="" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>
       </div>
     </a>
     <div style="display:flex;flex-direction:column;gap:14px">
@@ -593,12 +612,12 @@ a:hover{color:#2B1D14}
         <p style="font-size:15px;line-height:1.55;margin:0">{{ logoActive.body }}</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-        <button onClick="{{ lp0 }}" aria-label="Preview logo 1" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb0 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/nuvinta-wordmark.png" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
-        <button onClick="{{ lp1 }}" aria-label="Preview logo 2" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb1 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/totoy-brown-logo.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
-        <button onClick="{{ lp2 }}" aria-label="Preview logo 3" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb2 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/logo-concept-a.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
-        <button onClick="{{ lp3 }}" aria-label="Preview logo 4" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb3 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/logo-concept-b.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
-        <button onClick="{{ lp4 }}" aria-label="Preview logo 5" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb4 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/logo-identity-v2.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
-        <button onClick="{{ lp5 }}" aria-label="Preview logo 6" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb5 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="assets/logo-concept-d.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp0 }}" aria-label="Preview logo 1" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb0 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/nuvinta-wordmark.png" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp1 }}" aria-label="Preview logo 2" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb1 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/totoy-brown-logo.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp2 }}" aria-label="Preview logo 3" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb2 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/logo-concept-a.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp3 }}" aria-label="Preview logo 4" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb3 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/logo-concept-b.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp4 }}" aria-label="Preview logo 5" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb4 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/logo-identity-v2.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
+        <button onClick="{{ lp5 }}" aria-label="Preview logo 6" style="aspect-ratio:1/1;padding:4px;border:2px solid {{ lb5 }};border-radius:3px;background:#F7F3EA;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)"><img src="img/logo-concept-d.jpg" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></button>
       </div>
       <p style="font-size:13px;line-height:1.5;margin:0;color:#4E3B2D">Tap a mark to preview it. Tap the large image to open it full size.</p>
     </div>
@@ -618,14 +637,14 @@ a:hover{color:#2B1D14}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start">
       <div style="grid-column:span 2;min-width:0;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:#EFE4CC">
         <div style="position:relative;aspect-ratio:1/1;max-height:640px;width:100%">
-          <img src="assets/mockups/a1-tray.jpg" alt="Mock-up A: Tray liner & burger wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo0 }};transition:opacity .4s">
-          <img src="assets/mockups/a2-flatlay.jpg" alt="Mock-up A: Cup, napkin, menu & wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo1 }};transition:opacity .4s">
-          <img src="assets/mockups/a3-cups.jpg" alt="Mock-up A: Cup family" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo2 }};transition:opacity .4s">
-          <img src="assets/mockups/a4-cup-menu.jpg" alt="Mock-up A: Counter set" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo3 }};transition:opacity .4s">
-          <img src="assets/mockups/b1-tray.jpg" alt="Mock-up B: Barkada tray" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo4 }};transition:opacity .4s">
-          <img src="assets/mockups/b2-flatlay.jpg" alt="Mock-up B: Cup, menu & wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo5 }};transition:opacity .4s">
-          <img src="assets/mockups/b3-cups.jpg" alt="Mock-up B: Blue cup stack" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo6 }};transition:opacity .4s">
-          <img src="assets/mockups/b4-cup-menu.jpg" alt="Mock-up B: Blue cup set" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo7 }};transition:opacity .4s">
+          <img src="img/mockups/a1-tray.jpg" alt="Mock-up A: Tray liner & burger wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo0 }};transition:opacity .4s">
+          <img src="img/mockups/a2-flatlay.jpg" alt="Mock-up A: Cup, napkin, menu & wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo1 }};transition:opacity .4s">
+          <img src="img/mockups/a3-cups.jpg" alt="Mock-up A: Cup family" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo2 }};transition:opacity .4s">
+          <img src="img/mockups/a4-cup-menu.jpg" alt="Mock-up A: Counter set" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo3 }};transition:opacity .4s">
+          <img src="img/mockups/b1-tray.jpg" alt="Mock-up B: Barkada tray" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo4 }};transition:opacity .4s">
+          <img src="img/mockups/b2-flatlay.jpg" alt="Mock-up B: Cup, menu & wrap" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo5 }};transition:opacity .4s">
+          <img src="img/mockups/b3-cups.jpg" alt="Mock-up B: Blue cup stack" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo6 }};transition:opacity .4s">
+          <img src="img/mockups/b4-cup-menu.jpg" alt="Mock-up B: Blue cup set" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ mo7 }};transition:opacity .4s">
           <button onClick="{{ mockPrev }}" aria-label="Previous mock-up" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid #2B1D14;background:#F5EEDF;color:#2B1D14;cursor:pointer;font-size:18px">←</button>
           <button onClick="{{ mockNext }}" aria-label="Next mock-up" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1.5px solid #2B1D14;background:#2B1D14;color:#F5EEDF;cursor:pointer;font-size:18px">→</button>
           <span style="position:absolute;top:12px;left:12px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;background:#2B1D14;color:#F5EEDF;padding:6px 10px;border-radius:2px;pointer-events:none">{{ mockCounter }}</span>
@@ -638,37 +657,37 @@ a:hover{color:#2B1D14}
       <div style="display:flex;flex-direction:column;gap:8px">
         <sc-if value="{{ isSetA }}" hint-placeholder-val="{{ true }}">
           <button onClick="{{ mp0 }}" aria-label="Tray liner & burger wrap" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb0 }};border-radius:3px;background:{{ mbg0 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/a1-tray.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/a1-tray.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">A1</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Tray liner & burger wrap</span></span>
           </button>
           <button onClick="{{ mp1 }}" aria-label="Cup, napkin, menu & wrap" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb1 }};border-radius:3px;background:{{ mbg1 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/a2-flatlay.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/a2-flatlay.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">A2</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Cup, napkin, menu & wrap</span></span>
           </button>
           <button onClick="{{ mp2 }}" aria-label="Cup family" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb2 }};border-radius:3px;background:{{ mbg2 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/a3-cups.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/a3-cups.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">A3</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Cup family</span></span>
           </button>
           <button onClick="{{ mp3 }}" aria-label="Counter set" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb3 }};border-radius:3px;background:{{ mbg3 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/a4-cup-menu.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/a4-cup-menu.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">A4</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Counter set</span></span>
           </button>
         </sc-if>
         <sc-if value="{{ isSetB }}" hint-placeholder-val="{{ false }}">
           <button onClick="{{ mp4 }}" aria-label="Barkada tray" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb4 }};border-radius:3px;background:{{ mbg4 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/b1-tray.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/b1-tray.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">B1</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Barkada tray</span></span>
           </button>
           <button onClick="{{ mp5 }}" aria-label="Cup, menu & wrap" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb5 }};border-radius:3px;background:{{ mbg5 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/b2-flatlay.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/b2-flatlay.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">B2</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Cup, menu & wrap</span></span>
           </button>
           <button onClick="{{ mp6 }}" aria-label="Blue cup stack" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb6 }};border-radius:3px;background:{{ mbg6 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/b3-cups.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/b3-cups.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">B3</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Blue cup stack</span></span>
           </button>
           <button onClick="{{ mp7 }}" aria-label="Blue cup set" style="display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;padding:8px;border:1.5px solid {{ mb7 }};border-radius:3px;background:{{ mbg7 }};cursor:pointer;color:#2B1D14;transition:transform .2s" style-hover="transform:translateX(4px)">
-            <img src="assets/mockups/b4-cup-menu.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
+            <img src="img/mockups/b4-cup-menu.jpg" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:2px;display:block">
             <span><span style="display:block;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#B8432F">B4</span><span style="display:block;font-family:'Young Serif',serif;font-size:17px;line-height:1.2;margin-top:2px">Blue cup set</span></span>
           </button>
         </sc-if>
@@ -719,17 +738,28 @@ a:hover{color:#2B1D14}
 </section>
 
 <sc-if value="{{ showTopBtn }}" hint-placeholder-val="{{ false }}">
-  <button onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:56px;height:56px;border-radius:50%;border:2px solid #2B1D14;background:#D9A42B;color:#2B1D14;cursor:pointer;box-shadow:3px 3px 0 #2B1D14;transition:transform .2s, box-shadow .2s" style-hover="transform:translate(-2px,-2px);box-shadow:5px 5px 0 #2B1D14">
+  <button onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:clamp(14px,3vw,28px);bottom:{{ topBtnBottom }};z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:56px;height:56px;border-radius:50%;border:2px solid #2B1D14;background:#D9A42B;color:#2B1D14;cursor:pointer;box-shadow:3px 3px 0 #2B1D14;transition:transform .2s, box-shadow .2s" style-hover="transform:translate(-2px,-2px);box-shadow:5px 5px 0 #2B1D14">
     <span style="font-size:18px;line-height:1">↑</span>
     <span style="font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em">TOP</span>
   </button>
 </sc-if>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <nav aria-label="Sections" style="position:fixed;left:0;right:0;bottom:0;z-index:70;background:#2B1D14;border-top:3px solid #D9A42B;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:env(safe-area-inset-bottom)">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+      <a href="{{ t.href }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:60px;padding:8px 2px;color:{{ t.fg }};background:{{ t.bg }};text-align:center;transition:background .2s">
+        <span style="width:22px;height:4px;border-radius:2px;background:{{ t.bar }}"></span>
+        <span style="font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase">{{ t.label }}</span>
+      </a>
+    </sc-for>
+  </nav>
+  <div style="height:64px"></div>
+</sc-if>
 <!-- VISIT -->
-<section id="visit" data-screen-label="Visit" style="max-width:1200px;margin:0 auto;padding:clamp(48px,7vw,72px) 20px">
+<section id="visit" data-screen-label="Visit" style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:#FBF6EC">
     <div style="padding:clamp(24px,4vw,40px);display:flex;flex-direction:column;gap:16px;justify-content:center">
       <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0;color:#B8432F">Visit the Tambayan</p>
-      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(32px,4.2vw,50px);line-height:1.05;margin:0">Dumangas, Iloilo</h2>
+      <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0">Dumangas, Iloilo</h2>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-family:'Space Mono',monospace;font-size:15px;font-weight:700;letter-spacing:0.06em;background:#2B1D14;color:#F5EEDF;padding:8px 12px;border-radius:2px">RPF7+G87</span>
         <span style="font-size:15px;color:#4E3B2D">Dumangas, Iloilo, Philippines</span>
@@ -746,7 +776,7 @@ a:hover{color:#2B1D14}
 </section>
 
 <!-- CLOSING -->
-<section id="closing" data-screen-label="Closing" style="max-width:1200px;margin:0 auto;padding:0 20px clamp(48px,7vw,72px)">
+<section id="closing" data-screen-label="Closing" style="max-width:1200px;margin:0 auto;padding:0 16px clamp(36px,7vw,72px)">
   <div style="background:#B8432F;color:#F5EEDF;border-radius:4px;padding:clamp(28px,5vw,56px);box-shadow:8px 8px 0 #2B1D14;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px 48px;align-items:center">
     <div>
       <p style="font-family:'Young Serif',serif;font-size:clamp(28px,3.6vw,44px);line-height:1.1;margin:0 0 14px;text-wrap:balance">The kanto raised a generation. Nuvìnta gives it a place to come back to.</p>
@@ -771,7 +801,7 @@ a:hover{color:#2B1D14}
   <div style="max-width:1280px;margin:0 auto;padding:72px 24px 36px">
     <div style="display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;padding-bottom:48px;border-bottom:1px solid rgba(245,238,223,0.2)">
       <div style="display:flex;align-items:center;gap:20px">
-        <img src="assets/totoy-brown-logo.jpg" alt="Totoy Brown Tambayan" style="width:96px;height:96px;object-fit:contain;border-radius:4px;display:block">
+        <img src="img/totoy-brown-logo.jpg" alt="Totoy Brown Tambayan" style="width:96px;height:96px;object-fit:contain;border-radius:4px;display:block">
         <div>
           <p style="font-family:'Young Serif',serif;font-size:clamp(40px,5vw,60px);line-height:1;margin:0">Nuvìnta</p>
           <div style="display:flex;gap:4px;margin:14px 0">
@@ -870,7 +900,7 @@ class Component extends DCLogic {
     if (this._loader) return this._loader;
     const h = React.createElement;
     const badge = h('div', { style: { position: 'relative', width: 'clamp(110px,28vw,150px)', height: 'clamp(110px,28vw,150px)', borderRadius: '50%', border: '3px solid #D9A42B', padding: 8, background: '#F7F3EA', boxShadow: '0 0 0 6px #2B1D14, 0 0 0 8px #B8432F', animation: 'nvSpin 2.4s ease-in-out infinite' } },
-      h('img', { src: 'assets/totoy-brown-logo.jpg', alt: '', style: { width: '100%', height: '100%', objectFit: 'contain', borderRadius: '50%', display: 'block' } }));
+      h('img', { src: 'img/totoy-brown-logo.jpg', alt: '', style: { width: '100%', height: '100%', objectFit: 'contain', borderRadius: '50%', display: 'block' } }));
     const word = h('span', null, [...'Nuvìnta'].map((ch, i) => h('span', { key: i, style: { display: 'inline-block', color: ch === 'ì' ? '#D9A42B' : 'inherit', animation: `nvRise 0.8s cubic-bezier(.2,.75,.2,1) ${200 + i * 90}ms both` } }, ch)));
     this._loader = { badge, word };
     return this._loader;
@@ -920,7 +950,7 @@ class Component extends DCLogic {
       ['The Bakuran',"A garden lawn with shade trees, potted plants and loose seating, recalling afternoons in a lola's front yard.",'area-bakuran'],
       ['The Silong','A covered pavilion under a wide awning for rainy-season and midday comfort, with ceiling fans and misting for hot months.','area-silong'],
       ['The Tambayan Bench',"Long communal benches facing the street, the cafe's nod to the original kanto and its best people-watching seat.",'area-bench'],
-    ].map(([title,body,slot]) => ({ title, body, slot, photo: 'assets/photos/' + slot + '.webp' }));
+    ].map(([title,body,slot]) => ({ title, body, slot, photo: 'img/photos/' + slot + '.webp' }));
     const seating = [
       ['Elevated monobloc','The iconic Filipino plastic chair, reissued in custom earth tones with cushions. Familiar and instantly recognizable, but comfortable.'],
       ['Rattan and narra','Woven rattan armchairs and solid-wood tables that reference 90s living rooms.'],
@@ -942,7 +972,7 @@ class Component extends DCLogic {
       { tag: 'CRUSH GEAR', name: 'The Crush Ring', color: B, slot: 'zone-crushring', placeholder: 'Crush Ring arena photo', desc: 'A raised battle arena for head-to-head Crush Gear matches, styled like a 90s TV tournament set with a hand-painted scoreboard.' },
       { tag: 'ARCADE BASKETBALL', name: 'Kanto Hoops', color: T, slot: 'zone-hoops', placeholder: 'Arcade hoops photo', desc: "A token-operated arcade basketball machine near the Tambayan Bench, the cafe's loudest and most social corner. A weekly leaderboard chalkboard turns casual shots into friendly rivalries." },
       { tag: 'ANIME VIEWING', name: 'The Saturday Morning Lounge', color: R, slot: 'zone-lounge', placeholder: 'Anime lounge photo', desc: 'A shaded lounge with floor cushions, papag daybeds and a TV set in a wood-cabinet frame, playing classic 90s and early-2000s anime on a posted schedule: Slam Dunk, Ghost Fighter, Flame of Recca and other childhood favorites. It is the quiet counterpoint to the play zones, and the place guests settle in for a second cup.' },
-    ].map(z => ({ ...z, photo: 'assets/photos/' + z.slot + '.webp' }));
+    ].map(z => ({ ...z, photo: 'img/photos/' + z.slot + '.webp' }));
     const drivers = [
       ['Longer dwell time, larger tickets.','A typical cafe visit ends when the cup is empty. A race heat, a Beyblade best-of-five or one more anime episode keeps guests in their seats, and longer stays lead naturally to a second drink, a snack and a barkada bucket.'],
       ['Built-in reasons to return.','Players come back to beat a lap time, tune a car or climb the Hoops leaderboard. Each visit has an unfinished goal, which is what turns first-timers into regulars.'],
@@ -1171,12 +1201,12 @@ class Component extends DCLogic {
     if (extraKeys.includes(mt)) { const x = extraMap[mt]; menuView = { title: x.title, note: x.intro, price: '', items: x.items }; }
     else { const m = d.menus[mt]; menuView = { title: m.title, note: m.note, price: m.price, items: m.items.map(([name,desc]) => ({ name, desc })) }; }
     const logos = [
-      { src: 'assets/nuvinta-wordmark.png', title: 'Nuvìnta horizontal wordmark', tag: 'Primary · Wordmark', body: 'For wide spaces such as storefront fascia, menu headers, websites and email signatures.', bg: '#F5EEDF', pad: '10%', tagColor: R },
-      { src: 'assets/totoy-brown-logo.jpg', title: 'Totoy Brown Tambayan', tag: 'Parent brand', body: 'Totoy Brown Tambayan already stands for warmth and barkada culture. Nuvìnta extends that equity into a premium, higher-ticket format.', bg: '#F7F3EA', pad: '4%', tagColor: R },
-      { src: 'assets/logo-concept-a.jpg', title: 'Direction A · Barako Script', tag: 'Proposed · Coffee & Tambayan', body: 'Logomark, wordmark, round emblem, horizontal brand and minimalist emblem in barako brown tones.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
-      { src: 'assets/logo-concept-b.jpg', title: 'Direction B · Kanto Brush', tag: "Proposed · Nostalgic 90's", body: 'Logo mark, wordmark, badge logo and minimalist logo in kanto blue and orange.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
-      { src: 'assets/logo-identity-v2.jpg', title: 'Direction C · Tambayan Variations', tag: 'Proposed · Full Identity System', body: 'Primary logo, logo mark (icon), wordmark, simplified badge and minimalist 1-color logo.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
-      { src: 'assets/logo-concept-d.jpg', title: 'Direction D · Barkada Emblem', tag: 'Proposed · By Totoy Brown', body: "Full emblem: Nos-Vinta Coffee by Totoy Brown, Nostalgic 90's Tambayan.", bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
+      { src: 'img/nuvinta-wordmark.png', title: 'Nuvìnta horizontal wordmark', tag: 'Primary · Wordmark', body: 'For wide spaces such as storefront fascia, menu headers, websites and email signatures.', bg: '#F5EEDF', pad: '10%', tagColor: R },
+      { src: 'img/totoy-brown-logo.jpg', title: 'Totoy Brown Tambayan', tag: 'Parent brand', body: 'Totoy Brown Tambayan already stands for warmth and barkada culture. Nuvìnta extends that equity into a premium, higher-ticket format.', bg: '#F7F3EA', pad: '4%', tagColor: R },
+      { src: 'img/logo-concept-a.jpg', title: 'Direction A · Barako Script', tag: 'Proposed · Coffee & Tambayan', body: 'Logomark, wordmark, round emblem, horizontal brand and minimalist emblem in barako brown tones.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
+      { src: 'img/logo-concept-b.jpg', title: 'Direction B · Kanto Brush', tag: "Proposed · Nostalgic 90's", body: 'Logo mark, wordmark, badge logo and minimalist logo in kanto blue and orange.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
+      { src: 'img/logo-identity-v2.jpg', title: 'Direction C · Tambayan Variations', tag: 'Proposed · Full Identity System', body: 'Primary logo, logo mark (icon), wordmark, simplified badge and minimalist 1-color logo.', bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
+      { src: 'img/logo-concept-d.jpg', title: 'Direction D · Barkada Emblem', tag: 'Proposed · By Totoy Brown', body: "Full emblem: Nos-Vinta Coffee by Totoy Brown, Nostalgic 90's Tambayan.", bg: '#F7F3EA', pad: '0', tagColor: '#2F6B66' },
     ];
     const stamps = S.stamps ?? 3;
     const sections = [['01','Summary','summary'],['02','Brand','brand'],['03','Experience','experience'],['04','Market','market'],['05','Menu','menu'],['06','Launch','launch'],['07','Vision','vision'],['08','Identity','identity'],['09','Visit','visit']];
@@ -1191,6 +1221,24 @@ class Component extends DCLogic {
       rail: sections.map(([num,title,id]) => ({ num, title, href: '#' + id, bg: act === id ? B : 'transparent', fg: act === id ? C : B, numColor: act === id ? M : R })),
       scrollWidth: (S.scrollPct ?? 0) + '%',
       showTopBtn: (S.scrollPct ?? 0) > 4,
+      topBtnBottom: d.isMobile ? '78px' : 'clamp(14px,3vw,28px)',
+      tabs: [['Home','#top','top'],['Play','#experience','experience'],['Menu','#menu','menu'],['Brand','#identity','identity'],['Visit','#visit','visit']].map(([label,href,id]) => {
+        const on = (act || 'top') === id || (id === 'top' && ['summary','brand','preview',null,undefined].includes(act)) || (id === 'experience' && act === 'market') || (id === 'menu' && act === 'launch') || (id === 'identity' && act === 'vision');
+        return { label, href, fg: on ? M : C, bg: on ? 'rgba(245,238,223,0.08)' : 'transparent', bar: on ? M : 'transparent' };
+      }),
+      ...(() => {
+        const pick = S.namePick ?? (() => { try { return localStorage.getItem('nv-name'); } catch (e) { return null; } })();
+        const mk = (key, name, meaning, feel, used) => ({ name, meaning, feel, used, bg: pick === key ? '#FBF6EC' : 'transparent',
+          btnLabel: pick === key ? '★ Preferred' : 'Mark as preferred', btnBg: pick === key ? B : 'transparent', btnFg: pick === key ? C : B,
+          onPick: () => { const v = pick === key ? null : key; try { v ? localStorage.setItem('nv-name', v) : localStorage.removeItem('nv-name'); } catch (e) {} this.setState({ namePick: v }); } });
+        return {
+          nameOptions: [
+            mk('nuvinta', 'Nuvìnta', 'New Vintage', 'Clean serif wordmark with the four-color jeepney stripe. Reads premium and calm.', 'the proposal, horizontal wordmark, Mock-up A'),
+            mk('nosvinta', 'Nos-Vinta', 'Nostalgia + Vintage', 'Brush-script graffiti lettering with a crown. Loud, street and very 90s.', 'Logo Directions A–D, Mock-up B'),
+          ],
+          nameVoteNote: pick ? 'Saved on this device' : 'Tap to mark a favorite',
+        };
+      })(),
       ...(() => {
         const v = S.dn ?? 0, tl = S.lang === 'tl';
         const mins = 15 * 60 + Math.round(v / 100 * 7 * 60);
