@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section id="plan" data-screen-label="09 Business Plan" style="background:#EFE4CC;color:#2B1D14;font-family:'Work Sans',sans-serif">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
+    <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">09 · Business Plan · Internal</p>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0 0 12px">The numbers and the plan</h2>
+    <p style="font-size:15.5px;line-height:1.6;max-width:760px;margin:0 0 8px">All amounts below are placeholder estimates for planning. Tap any amount to edit it; changes are saved on this device.</p>
+    <div style="display:flex;gap:6px;overflow-x:auto;padding:12px 0 4px;margin-bottom:16px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+        <button onClick="{{ t.onClick }}" style="flex:none;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;min-height:44px;padding:10px 14px;border:1.5px solid #2B1D14;border-radius:2px;cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};transition:background .2s" style-hover="background:#D9A42B;color:#2B1D14">{{ t.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ show.budget }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px">
+        <sc-for list="{{ budgetGroups }}" as="g" hint-placeholder-count="4">
+          <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#2B1D14;color:#F5EEDF">
+              <span style="font-family:'Young Serif',serif;font-size:19px">{{ g.name }}</span>
+              <span style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:#D9A42B">{{ g.totalLabel }}</span>
+            </div>
+            <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+              <label style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 16px;border-top:1px dashed rgba(43,29,20,0.25)">
+                <span style="font-size:14.5px;line-height:1.35">{{ it.name }}</span>
+                <span style="display:flex;align-items:center;gap:4px;flex:none">
+                  <span style="font-family:'Space Mono',monospace;font-size:13px;color:#B8432F">₱</span>
+                  <input type="number" inputmode="numeric" value="{{ it.value }}" onChange="{{ it.onChange }}" style="width:104px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;text-align:right;padding:8px;border:1px solid rgba(43,29,20,0.3);border-radius:2px;background:#FBF6EC;color:#2B1D14">
+                </span>
+              </label>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#B8432F;color:#F5EEDF;border-radius:4px;padding:18px 20px;box-shadow:6px 6px 0 #2B1D14">
+        <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Total startup budget</span>
+        <span style="font-family:'Young Serif',serif;font-size:clamp(28px,4vw,40px)">{{ budgetTotalLabel }}</span>
+        <button onClick="{{ resetBudget }}" style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:40px;padding:0 12px;border:1px solid #F5EEDF;border-radius:2px;background:transparent;color:#F5EEDF;cursor:pointer">Reset to defaults</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ show.breakeven }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px">
+        <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;padding:18px;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ beInputs }}" as="f" hint-placeholder-count="5">
+            <label style="display:flex;flex-direction:column;gap:6px">
+              <span style="display:flex;justify-content:space-between;gap:10px;font-size:14.5px"><span>{{ f.label }}</span><strong style="font-family:'Space Mono',monospace;color:#B8432F">{{ f.display }}</strong></span>
+              <input type="range" min="{{ f.min }}" max="{{ f.max }}" step="{{ f.step }}" value="{{ f.value }}" onInput="{{ f.onChange }}" onChange="{{ f.onChange }}" style="width:100%;accent-color:#B8432F;height:26px">
+            </label>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:start">
+          <sc-for list="{{ beResults }}" as="r" hint-placeholder-count="6">
+            <div style="background:{{ r.bg }};color:{{ r.fg }};border-radius:4px;padding:14px;border:1.5px solid #2B1D14">
+              <p style="font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 6px;opacity:0.85">{{ r.label }}</p>
+              <p style="font-family:'Young Serif',serif;font-size:clamp(20px,3vw,26px);line-height:1.1;margin:0">{{ r.value }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <p style="font-size:13.5px;line-height:1.5;margin:10px 0 0;color:#4E3B2D">Startup budget is taken from the Budget tab. Monthly fixed costs include rent, salaries, utilities and marketing.</p>
+    </sc-if>
+
+    <sc-if value="{{ show.timeline }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="height:8px;background:rgba(43,29,20,0.12);border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ timelinePct }};background:#2F6B66;transition:width .3s"></div></div>
+        <p style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;margin:0 0 6px">{{ timelineSummary }}</p>
+        <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="10">
+          <div style="display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:12px;align-items:center;background:#F5EEDF;border:1.5px solid #2B1D14;border-left:6px solid {{ m.color }};border-radius:3px;padding:12px 14px">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:#B8432F">{{ m.num }}</span>
+            <div style="min-width:0">
+              <p style="font-size:15.5px;font-weight:600;margin:0">{{ m.title }}</p>
+              <p style="font-size:13.5px;line-height:1.45;margin:2px 0 0;color:#4E3B2D">{{ m.when }}</p>
+            </div>
+            <button onClick="{{ m.onClick }}" style="font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;min-height:40px;min-width:96px;padding:0 10px;border:1.5px solid #2B1D14;border-radius:2px;cursor:pointer;background:{{ m.color }};color:{{ m.fg }}">{{ m.status }}</button>
+          </div>
+        </sc-for>
+        <p style="font-size:13px;margin:4px 0 0;color:#4E3B2D">Tap a status to cycle To do → In progress → Done.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ show.ops }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px">
+        <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden">
+          <p style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin:0;padding:12px 16px;background:#2B1D14;color:#F5EEDF">Proposed opening hours</p>
+          <sc-for list="{{ hours }}" as="h" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:11px 16px;border-top:1px dashed rgba(43,29,20,0.25)">
+              <span style="font-size:15px;font-weight:600">{{ h.day }}</span>
+              <span style="font-family:'Space Mono',monospace;font-size:13.5px;color:{{ h.color }}">{{ h.time }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#2B1D14;color:#F5EEDF">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Staffing plan</span>
+            <span style="font-family:'Space Mono',monospace;font-size:12px;color:#D9A42B">{{ staffTotal }}</span>
+          </div>
+          <sc-for list="{{ staff }}" as="s" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 16px;border-top:1px dashed rgba(43,29,20,0.25)">
+              <div>
+                <p style="font-size:15px;font-weight:600;margin:0">{{ s.role }}</p>
+                <p style="font-size:13px;line-height:1.4;margin:2px 0 0;color:#4E3B2D">{{ s.duty }}</p>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <button onClick="{{ s.dec }}" aria-label="Fewer" style="width:34px;height:34px;border:1.5px solid #2B1D14;border-radius:50%;background:transparent;cursor:pointer;font-size:16px;color:#2B1D14">−</button>
+                <span style="font-family:'Space Mono',monospace;font-size:15px;font-weight:700;min-width:18px;text-align:center">{{ s.count }}</span>
+                <button onClick="{{ s.inc }}" aria-label="More" style="width:34px;height:34px;border:1.5px solid #2B1D14;border-radius:50%;background:#2B1D14;color:#F5EEDF;cursor:pointer;font-size:16px">+</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ show.suppliers }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px">
+        <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="7">
+          <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+              <p style="font-family:'Young Serif',serif;font-size:19px;line-height:1.2;margin:0">{{ s.cat }}</p>
+              <button onClick="{{ s.onClick }}" style="flex:none;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;min-height:32px;padding:0 8px;border:1.5px solid #2B1D14;border-radius:2px;cursor:pointer;background:{{ s.color }};color:{{ s.fg }}">{{ s.status }}</button>
+            </div>
+            <p style="font-size:14.5px;line-height:1.5;margin:0">{{ s.need }}</p>
+            <p style="font-size:13px;line-height:1.45;margin:0;color:#4E3B2D"><strong>Look for:</strong> {{ s.source }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:13px;margin:8px 0 0;color:#4E3B2D">Tap a status to cycle Searching → Quoted → Confirmed.</p>
+    </sc-if>
+
+    <sc-if value="{{ show.risks }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ risks }}" as="r" hint-placeholder-count="8">
+          <div style="background:#F5EEDF;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden">
+            <button onClick="{{ r.toggle }}" style="width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 16px;background:none;border:none;cursor:pointer;text-align:left;color:#2B1D14">
+              <span style="font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 8px;border-radius:2px;background:{{ r.color }};color:#F5EEDF">{{ r.level }}</span>
+              <span style="font-size:15.5px;font-weight:600">{{ r.risk }}</span>
+              <span style="font-family:'Space Mono',monospace;font-size:16px;transform:rotate({{ r.rot }});transition:transform .2s">+</span>
+            </button>
+            <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:14.5px;line-height:1.55;margin:0;padding:0 16px 16px 16px"><strong style="color:#2F6B66">How we handle it:</strong> {{ r.fix }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tab: 'budget', open: {} };
+  componentDidMount() {
+    try { const s = JSON.parse(localStorage.getItem('nv-plan') || '{}'); if (s.ver !== 2) { delete s.budget; delete s.be; } this.setState(s); } catch (e) {}
+  }
+  save(patch) { this.setState(patch, () => { try { const { budget, be, ms, staff, sup } = this.state; localStorage.setItem('nv-plan', JSON.stringify({ ver: 2, budget, be, ms, staff, sup })); } catch (e) {} }); }
+  renderVals() {
+    const B = '#2B1D14', C = '#F5EEDF', R = '#B8432F', M = '#D9A42B', T = '#2F6B66';
+    const peso = n => '₱' + Math.round(n).toLocaleString('en-PH');
+    const S = this.state;
+    const tabs = [['budget','Startup budget'],['breakeven','Break-even'],['timeline','Timeline'],['ops','Hours & staff'],['suppliers','Suppliers'],['risks','Risks']]
+      .map(([k,label]) => ({ label, bg: S.tab === k ? B : 'transparent', fg: S.tab === k ? C : B, onClick: () => this.setState({ tab: k }) }));
+    const show = Object.fromEntries(['budget','breakeven','timeline','ops','suppliers','risks'].map(k => [k, S.tab === k]));
+    const groupsDef = [
+      ['Build & site (mostly bamboo)', [['Bamboo kiosk & bar with nipa roof', 120000], ['Gravel, plants & string lights', 40000], ['Bamboo tables, benches & stools', 50000], ['Electrical, water & plumbing', 50000]]],
+      ['Coffee & kitchen equipment', [['Espresso machine (1-group or second-hand)', 60000], ['Coffee grinder', 15000], ['Chest freezer & ref (second-hand)', 30000], ['Fryer, griddle & prep', 20000], ['Blenders & smallwares', 15000]]],
+      ['Play zones (DIY where possible)', [['Bamboo-framed Tamiya track', 15000], ['Beyblade stadiums & rental tops', 8000], ['Crush Gear arena (DIY)', 5000], ['Arcade basketball (second-hand)', 35000], ['Lounge TV & speaker', 15000]]],
+      ['Permits & opening', [['Permits & registrations', 15000], ['Initial inventory', 30000], ['Branding, packaging & signage', 25000], ['Pre-launch marketing', 10000], ['Working capital (2 months)', 100000]]],
+    ];
+    const bv = S.budget || {};
+    let grand = 0;
+    const budgetGroups = groupsDef.map(([name, items], gi) => {
+      let tot = 0;
+      const its = items.map(([n, def], ii) => {
+        const key = gi + '-' + ii, v = bv[key] ?? def; tot += Number(v) || 0;
+        return { name: n, value: v, onChange: e => this.save({ budget: { ...(this.state.budget || {}), [key]: Number(e.target.value) || 0 } }) };
+      });
+      grand += tot;
+      return { name, items: its, totalLabel: peso(tot) };
+    });
+    const be = { ticket: 200, cust: 50, days: 26, cogs: 35, fixed: 70000, ...(S.be || {}) };
+    const setBe = k => e => this.save({ be: { ...(this.state.be || {}), [k]: Number(e.target.value) } });
+    const beInputs = [
+      ['ticket', 'Average spend per customer', 100, 600, 10, v => peso(v)],
+      ['cust', 'Customers per day', 10, 300, 5, v => v],
+      ['days', 'Open days per month', 15, 31, 1, v => v],
+      ['cogs', 'Food & drink cost (% of sales)', 20, 60, 1, v => v + '%'],
+      ['fixed', 'Monthly fixed costs', 20000, 300000, 5000, v => peso(v)],
+    ].map(([k, label, min, max, step, fmt]) => ({ label, min, max, step, value: be[k], display: fmt(be[k]), onChange: setBe(k) }));
+    const revenue = be.ticket * be.cust * be.days, gross = revenue * (1 - be.cogs / 100), profit = gross - be.fixed;
+    const beCust = be.fixed / ((1 - be.cogs / 100) * be.ticket * be.days);
+    const payback = profit > 0 ? grand / profit : null;
+    const beResults = [
+      ['Monthly sales', peso(revenue), C, B], ['Gross profit', peso(gross), C, B],
+      ['Monthly net profit', peso(profit), profit >= 0 ? T : R, C], ['Break-even customers / day', Math.ceil(beCust), M, B],
+      ['Startup budget', peso(grand), C, B], ['Payback period', payback ? (payback < 1 ? '< 1 month' : payback.toFixed(1) + ' months') : 'Not profitable yet', B, C],
+    ].map(([label, value, bg, fg]) => ({ label, value, bg, fg }));
+    const msDef = [
+      ['Finalize name & logo (Nuvìnta vs Nos-Vinta)', 'Brand'], ['Confirm site lease & layout — RPF7+G87 Dumangas', 'Site'],
+      ['Business permits & registrations', 'Legal'], ['Construction & landscaping', 'Build'], ['Equipment, play zones & suppliers', 'Setup'],
+      ['Hire & train the Tambay Crew', 'People'], ['Pre-launch teasers (Weeks −8 to −1)', 'Marketing'], ['Soft launch: Tambayan Preview Nights', 'Launch'],
+      ['Opening weekend: The Batang 90s Reunion', 'Launch'], ['Months 1–6: weekly events & loyalty program', 'Growth'],
+    ];
+    const stCol = { 'To do': ['transparent', B], 'In progress': [M, B], 'Done': [T, C] }, order = ['To do', 'In progress', 'Done'];
+    const ms = S.ms || {};
+    const milestones = msDef.map(([title, when], i) => {
+      const st = ms[i] || 'To do';
+      return { num: String(i + 1).padStart(2, '0'), title, when, status: st, color: st === 'To do' ? '#E3D6BC' : stCol[st][0], fg: stCol[st][1],
+        onClick: () => this.save({ ms: { ...(this.state.ms || {}), [i]: order[(order.indexOf(st) + 1) % 3] } }) };
+    });
+    const done = milestones.filter(m => m.status === 'Done').length;
+    const hours = [['Monday', 'Closed · maintenance', R], ['Tue – Thu', '10:00 AM – 10:00 PM', B], ['Fri – Sat', '10:00 AM – 12:00 MN', B], ['Sunday', '8:00 AM – 10:00 PM', B], ['Merienda Set', '2:00 – 5:00 PM daily', T]]
+      .map(([day, time, color]) => ({ day, time, color }));
+    const staffDef = [['Store manager', 'Runs operations, cash and the team', 1], ['Baristas', 'Espresso bar and signature drinks', 3], ['Kitchen / merienda crew', 'Food prep, fryer and Kanto Cart', 2], ['Tambay Crew', 'Rentals, race marshals, tournament hosts', 2], ['Cashier / runner', 'Orders, serving and clean-up', 1]];
+    const sc = S.staff || {};
+    let staffN = 0;
+    const staff = staffDef.map(([role, duty, def], i) => {
+      const n = sc[i] ?? def; staffN += n;
+      return { role, duty, count: n, inc: () => this.save({ staff: { ...(this.state.staff || {}), [i]: n + 1 } }), dec: () => this.save({ staff: { ...(this.state.staff || {}), [i]: Math.max(0, n - 1) } }) };
+    });
+    const supDef = [
+      ['Coffee beans', 'Barako house blend plus single-origin for pour-over.', 'Batangas, Benguet, Sagada, Kalinga roasters or farm co-ops'],
+      ['Dairy & alt milk', 'Fresh milk, oat, soy and coconut milk.', 'Local dairy co-op; Iloilo wholesale grocers'],
+      ['Merienda ingredients', 'Pandesal, fishball/kikiam, spaghetti, turon, ice cream.', 'Dumangas / Iloilo City bakeries and market suppliers'],
+      ['Packaging', 'Cups, lids, sleeves, tray liners, wraps, napkins, paper bags.', 'Custom-print packaging suppliers (minimum order quantities)'],
+      ['Toys & parts', 'Mini 4WD kits and parts, Beyblade tops and launchers, Crush Gear.', 'Hobby shops and toy distributors (also prize sponsors)'],
+      ['Arcade machine', 'Token-operated basketball machine.', 'Arcade equipment sellers; second-hand units'],
+      ['Furniture & build', 'Bamboo, nipa, monobloc chairs, string lights.', 'Local bamboo builders and furniture makers in Iloilo'],
+    ];
+    const supOrder = ['Searching', 'Quoted', 'Confirmed'], supCol = { Searching: ['#E3D6BC', B], Quoted: [M, B], Confirmed: [T, C] };
+    const sp = S.sup || {};
+    const suppliers = supDef.map(([cat, need, source], i) => {
+      const st = sp[i] || 'Searching';
+      return { cat, need, source, status: st, color: supCol[st][0], fg: supCol[st][1], onClick: () => this.save({ sup: { ...(this.state.sup || {}), [i]: supOrder[(supOrder.indexOf(st) + 1) % 3] } }) };
+    });
+    const riskDef = [
+      ['High', 'Rainy season keeps guests away', 'Covered Silong and play zones under roof; rainy-day menu (champorado, arroz caldo) and indoor anime marathons.'],
+      ['High', 'Startup costs run over budget', 'Phase the build: open with core zones first, add Crush Ring and extras after month 3; keep a 10–15% contingency.'],
+      ['Medium', 'Slow weekday traffic', 'Tambay Tuesdays and Tune-Up Thursdays, Merienda Set 2–5 PM, remote-worker perks in the Silong.'],
+      ['Medium', 'Toys and machines break or wear out', 'Routine maintenance schedule, spare parts stock, rental deposits, Tambay Crew checks before each tournament.'],
+      ['Medium', 'Noise complaints from neighbors', 'Loud zones face the street, quiet hours after 10 PM on weekdays, talk to barangay early.'],
+      ['Medium', 'Anime screening rights', 'Secure proper public-viewing licenses before launch; fall back to music videos and OPM sets.'],
+      ['Medium', 'Kids\u2019 safety in play zones', 'Clear rules, age divisions, supervised kids\u2019 sessions, rounded edges and first-aid kit on site.'],
+      ['Low', 'Name or logo conflict', 'Check the final name with IPOPHL before printing packaging and signage.'],
+    ];
+    const op = S.open || {};
+    const risks = riskDef.map(([level, risk, fix], i) => ({ level, risk, fix, color: level === 'High' ? R : level === 'Medium' ? '#8A6516' : T, open: !!op[i], rot: op[i] ? '45deg' : '0deg',
+      toggle: () => this.setState(s => ({ open: { ...s.open, [i]: !s.open[i] } })) }));
+    return {
+      tabs, show, budgetGroups, budgetTotalLabel: peso(grand), resetBudget: () => this.save({ budget: {} }),
+      beInputs, beResults, milestones, timelinePct: Math.round(done / milestones.length * 100) + '%', timelineSummary: done + ' of ' + milestones.length + ' milestones done',
+      hours, staff, staffTotal: staffN + ' people', suppliers, risks,
+    };
+  }
+}
+</script>
+</body>
+</html>

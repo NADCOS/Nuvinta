@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section id="games" data-screen-label="11 Tambayan Games" style="background:#2F6B66;color:#F5EEDF;font-family:'Work Sans',sans-serif">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
+    <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#D9A42B">11 · Tambayan Games · Demos</p>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0 0 20px">Try the tambayan</h2>
+    <div style="display:flex;gap:6px;overflow-x:auto;margin-bottom:16px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.onClick }}" style="flex:none;white-space:nowrap;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;min-height:44px;padding:10px 14px;border:1.5px solid #F5EEDF;border-radius:2px;cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};transition:background .2s" style-hover="background:#D9A42B;color:#2B1D14;border-color:#D9A42B">{{ t.label }}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ show.order }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;background:#F5EEDF;color:#2B1D14;border-radius:4px;overflow:hidden">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="12">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px dashed rgba(43,29,20,0.25);background:{{ it.bg }}">
+              <div style="min-width:0">
+                <p style="font-size:15px;font-weight:600;margin:0">{{ it.name }}</p>
+                <p style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;margin:2px 0 0;color:#2F6B66">{{ it.cat }}</p>
+              </div>
+              <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#B8432F">{{ it.price }}</span>
+              <div style="display:flex;align-items:center;gap:6px">
+                <button onClick="{{ it.dec }}" aria-label="Remove one" style="width:36px;height:36px;border:1.5px solid #2B1D14;border-radius:50%;background:transparent;cursor:pointer;font-size:16px;color:#2B1D14">−</button>
+                <span style="font-family:'Space Mono',monospace;font-size:15px;font-weight:700;min-width:16px;text-align:center">{{ it.qty }}</span>
+                <button onClick="{{ it.inc }}" aria-label="Add one" style="width:36px;height:36px;border:1.5px solid #2B1D14;border-radius:50%;background:#2B1D14;color:#F5EEDF;cursor:pointer;font-size:16px">+</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background:#2B1D14;border-radius:4px;padding:20px;display:flex;flex-direction:column;gap:10px">
+          <p style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin:0;color:#D9A42B">Your order</p>
+          <sc-for list="{{ cart }}" as="c" hint-placeholder-count="0">
+            <div style="display:flex;justify-content:space-between;gap:10px;font-size:14.5px"><span>{{ c.label }}</span><span style="font-family:'Space Mono',monospace">{{ c.sub }}</span></div>
+          </sc-for>
+          <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}"><p style="font-size:14px;margin:0;opacity:0.8">Tap + to add items.</p></sc-if>
+          <div style="border-top:1px solid rgba(245,238,223,0.3);padding-top:10px;display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase">Total</span>
+            <span style="font-family:'Young Serif',serif;font-size:32px;color:#D9A42B">{{ total }}</span>
+          </div>
+          <button onClick="{{ clearCart }}" style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:40px;border:1px solid rgba(245,238,223,0.5);border-radius:2px;background:transparent;color:#F5EEDF;cursor:pointer">Clear order</button>
+          <p style="font-size:12.5px;line-height:1.45;margin:0;opacity:0.75">Indicative prices for planning only.</p>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ show.trivia }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#F5EEDF;color:#2B1D14;border-radius:4px;padding:clamp(20px,3vw,32px);max-width:760px">
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:14px;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">
+          <span style="color:#B8432F">{{ qCounter }}</span><span>Score {{ score }}</span>
+        </div>
+        <sc-if value="{{ notFinished }}" hint-placeholder-val="{{ true }}">
+          <p style="font-family:'Young Serif',serif;font-size:clamp(22px,3vw,28px);line-height:1.2;margin:0 0 16px">{{ q.text }}</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px">
+            <sc-for list="{{ q.options }}" as="o" hint-placeholder-count="4">
+              <button onClick="{{ o.onClick }}" style="text-align:left;min-height:52px;padding:12px 14px;border:1.5px solid #2B1D14;border-radius:3px;cursor:pointer;font-family:'Work Sans',sans-serif;font-size:15.5px;font-weight:600;background:{{ o.bg }};color:{{ o.fg }};transition:background .2s">{{ o.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ answered }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+              <p style="font-size:15px;margin:0;font-weight:600;color:{{ feedbackColor }}">{{ feedback }}</p>
+              <button onClick="{{ nextQ }}" style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:44px;padding:0 18px;border:none;border-radius:2px;background:#2B1D14;color:#F5EEDF;cursor:pointer">Next →</button>
+            </div>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{ finished }}" hint-placeholder-val="{{ false }}">
+          <p style="font-family:'Young Serif',serif;font-size:34px;margin:0 0 6px">{{ finalScore }}</p>
+          <p style="font-size:16px;margin:0 0 16px">{{ finalMsg }}</p>
+          <button onClick="{{ restart }}" style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:44px;padding:0 18px;border:none;border-radius:2px;background:#B8432F;color:#F5EEDF;cursor:pointer">Play again</button>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ show.race }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:start">
+        <div style="grid-column:span 2;min-width:0;background:#2B1D14;border-radius:4px;padding:18px">
+          <div style="position:relative;height:120px;border-radius:60px;border:10px solid #B8432F;background:#3A2A1F;overflow:hidden">
+            <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,#F5EEDF 0 14px,transparent 14px 28px);opacity:0.5"></div>
+            <div style="position:absolute;top:50%;left:{{ carLeft }};transform:translate(-50%,-50%);transition:left {{ carDur }} cubic-bezier(.3,.1,.3,1);width:54px;height:26px;border-radius:6px;background:#D9A42B;border:2px solid #F5EEDF;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;color:#2B1D14">4WD</div>
+            <div style="position:absolute;right:16px;top:0;bottom:0;width:10px;background:repeating-linear-gradient(0deg,#F5EEDF 0 8px,#2B1D14 8px 16px)"></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+            <input type="text" placeholder="Racer name" value="{{ racer }}" onInput="{{ onRacer }}" maxlength="16" style="flex:1;min-width:150px;font-family:'Work Sans',sans-serif;font-size:16px;padding:12px 14px;border:2px solid #F5EEDF;border-radius:2px;background:transparent;color:#F5EEDF;outline:none">
+            <button onClick="{{ race }}" style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:48px;padding:0 22px;border:none;border-radius:2px;background:#D9A42B;color:#2B1D14;cursor:pointer">{{ raceLabel }}</button>
+          </div>
+          <p style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;margin:12px 0 0;color:#D9A42B;min-height:20px">{{ lastLap }}</p>
+        </div>
+        <div style="background:#F5EEDF;color:#2B1D14;border-radius:4px;overflow:hidden">
+          <p style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin:0;padding:12px 16px;background:#B8432F;color:#F5EEDF">Pit Stop leaderboard · demo</p>
+          <sc-for list="{{ board }}" as="b" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;padding:11px 16px;border-top:1px dashed rgba(43,29,20,0.25)">
+              <span style="font-family:'Space Mono',monospace;font-weight:700;color:#B8432F">{{ b.rank }}</span>
+              <span style="font-weight:600">{{ b.name }}</span>
+              <span style="font-family:'Space Mono',monospace;font-weight:700">{{ b.time }}</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ boardEmpty }}" hint-placeholder-val="{{ true }}"><p style="font-size:14px;margin:0;padding:14px 16px">No laps yet. Enter a name and race.</p></sc-if>
+          <button onClick="{{ resetBoard }}" style="width:100%;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;min-height:40px;border:none;border-top:1px solid rgba(43,29,20,0.2);background:transparent;color:#2B1D14;cursor:pointer">Reset board</button>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tab: 'order', qty: {}, qi: 0, score: 0, picked: null, racer: '', racing: false, carAt: 0, lap: null, laps: [] };
+  componentDidMount() { try { this.setState({ laps: JSON.parse(localStorage.getItem('nv-laps') || '[]') }); } catch (e) {} }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const B = '#2B1D14', C = '#F5EEDF', R = '#B8432F', M = '#D9A42B', T = '#2F6B66';
+    const S = this.state;
+    const peso = n => '₱' + n.toLocaleString('en-PH');
+    const tabs = [['order', 'Build your order'], ['trivia', '90s trivia'], ['race', 'Tamiya lap race']].map(([k, label]) => ({ label, bg: S.tab === k ? C : 'transparent', fg: S.tab === k ? B : C, onClick: () => this.setState({ tab: k }) }));
+    const show = { order: S.tab === 'order', trivia: S.tab === 'trivia', race: S.tab === 'race' };
+    const menu = [
+      ['The Totoy Brown', 'Signature', 180], ['Taho Latte', 'Signature', 170], ["Sago't Gulaman Cold Brew", 'Signature', 180], ['Champorado Mocha', 'Signature', 190],
+      ['Sorbetero Affogato', 'Signature', 200], ['Spanish Latte', 'Espresso bar', 160], ['Americano', 'Espresso bar', 120],
+      ['Pandesal Sliders', 'Merienda', 180], ['The Kanto Cart', 'Merienda', 120], ['Party Spaghetti', 'Merienda', 160], ['The Recess Box', 'Merienda', 220], ['Banana Cue', 'Merienda', 80],
+    ];
+    let total = 0;
+    const cart = [];
+    const items = menu.map(([name, cat, p], i) => {
+      const q = S.qty[i] || 0; total += q * p;
+      if (q) cart.push({ label: q + '× ' + name, sub: peso(q * p) });
+      return { name, cat, price: peso(p), qty: q, bg: q ? '#FBF6EC' : 'transparent',
+        inc: () => this.setState(s => ({ qty: { ...s.qty, [i]: (s.qty[i] || 0) + 1 } })),
+        dec: () => this.setState(s => ({ qty: { ...s.qty, [i]: Math.max(0, (s.qty[i] || 0) - 1) } })) };
+    });
+    const Q = [
+      ['Ghost Fighter is the Filipino title of which anime?', ['Yu Yu Hakusho', 'Dragon Ball', 'Slam Dunk', 'Flame of Recca'], 0],
+      ['In Slam Dunk, which high school team does Hanamichi Sakuragi play for?', ['Ryonan', 'Shohoku', 'Kainan', 'Shoyo'], 1],
+      ['Which anime made Tamiya Mini 4WD racing a craze?', ["Let's & Go", 'Beyblade', 'Crush Gear Turbo', 'Voltes V'], 0],
+      ['What do bladers shout when launching a Beyblade?', ['Go, go, go!', 'Let it rip!', 'Ready, set!', 'Laban!'], 1],
+      ['Who is the main character of Flame of Recca?', ['Yusuke Urameshi', 'Recca Hanabishi', 'Kazuma Kuwabara', 'Tenma Tsukamoto'], 1],
+      ['Pogs were originally made from what?', ['Milk bottle caps', 'Soda cans', 'Old coins', 'Playing cards'], 0],
+      ['Which Japanese company made the Tamagotchi?', ['Sega', 'Nintendo', 'Bandai', 'Tamiya'], 2],
+      ['Teks cards are best known for being used in what game?', ['Tumbang preso', 'Sungka', 'Pitik / flipping cards', 'Patintero'], 2],
+    ];
+    const finished = S.qi >= Q.length;
+    const cur = Q[Math.min(S.qi, Q.length - 1)];
+    const answered = S.picked !== null;
+    const q = { text: cur[0], options: cur[1].map((label, i) => {
+      let bg = 'transparent', fg = B;
+      if (answered) { if (i === cur[2]) { bg = T; fg = C; } else if (i === S.picked) { bg = R; fg = C; } }
+      return { label, bg, fg, onClick: () => { if (this.state.picked !== null) return; this.setState(s => ({ picked: i, score: s.score + (i === cur[2] ? 1 : 0) })); } };
+    }) };
+    const correct = answered && S.picked === cur[2];
+    const top = [...S.laps].sort((a, b) => a.t - b.t).slice(0, 5);
+    const race = () => {
+      if (this.state.racing) return;
+      const t = +(9 + Math.random() * 5).toFixed(2);
+      this.setState({ racing: true, carAt: 0, lap: null });
+      this._t = setTimeout(() => {
+        this.setState({ carAt: 1 });
+        this._t = setTimeout(() => {
+          const name = (this.state.racer || 'Racer').trim().slice(0, 16);
+          const laps = [...this.state.laps, { n: name, t }];
+          try { localStorage.setItem('nv-laps', JSON.stringify(laps)); } catch (e) {}
+          this.setState({ racing: false, lap: t, laps });
+          this._t = setTimeout(() => this.setState({ carAt: 0 }), 900);
+        }, 1600);
+      }, 60);
+    };
+    return {
+      tabs, show, items, cart, cartEmpty: cart.length === 0, total: peso(total), clearCart: () => this.setState({ qty: {} }),
+      q, answered, notFinished: !finished, finished, score: S.score, qCounter: 'Question ' + Math.min(S.qi + 1, Q.length) + ' / ' + Q.length,
+      feedback: correct ? 'Tama! Batang 90s ka talaga.' : 'Sablay! The answer is ' + cur[1][cur[2]] + '.', feedbackColor: correct ? T : R,
+      nextQ: () => this.setState(s => ({ qi: s.qi + 1, picked: null })),
+      finalScore: S.score + ' / ' + Q.length, finalMsg: S.score >= 7 ? 'Certified Batang 90s.' : S.score >= 4 ? 'Pwede na! A few more reruns of Ghost Fighter.' : 'Time for a Saturday Morning Lounge marathon.',
+      restart: () => this.setState({ qi: 0, score: 0, picked: null }),
+      racer: S.racer, onRacer: e => this.setState({ racer: e.target.value }), race, raceLabel: S.racing ? 'Racing…' : 'Race!',
+      carLeft: S.carAt ? '88%' : '8%', carDur: S.carAt ? '1.6s' : '0s',
+      lastLap: S.lap ? 'Lap time: ' + S.lap.toFixed(2) + 's' : '',
+      board: top.map((l, i) => ({ rank: i + 1, name: l.n, time: l.t.toFixed(2) + 's' })), boardEmpty: top.length === 0,
+      resetBoard: () => { try { localStorage.removeItem('nv-laps'); } catch (e) {} this.setState({ laps: [] }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

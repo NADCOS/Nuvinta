@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./image-slot.js"></script></helmet>
+<section id="board" data-screen-label="10 Visual Board" style="background:#F5EEDF;color:#2B1D14;font-family:'Work Sans',sans-serif">
+  <div style="max-width:1200px;margin:0 auto;padding:clamp(36px,7vw,72px) 16px">
+    <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 10px;color:#B8432F">10 · Visual Board</p>
+    <h2 style="font-family:'Young Serif',serif;font-weight:400;font-size:clamp(28px,4.2vw,50px);line-height:1.05;margin:0 0 12px">Site map &amp; idea boards</h2>
+    <p style="font-size:15.5px;line-height:1.6;max-width:760px;margin:0 0 24px">Tap a zone on the map to see what goes there. Empty boxes are image slots: drag a photo onto any of them to fill it.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;align-items:start">
+      <div style="grid-column:span 2;min-width:0;border:1.5px solid #2B1D14;border-radius:4px;padding:10px;background:#E8DCC2">
+        <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(4,minmax(64px,1fr)) 44px 30px;gap:6px;grid-template-areas:'window window silong silong lounge lounge' 'window window silong silong lounge lounge' 'pit pit bakuran bakuran stage stage' 'hoops crush bakuran bakuran stage stage' 'bench bench bench bench bench bench' 'street street street street street street'">
+          <sc-for list="{{ zones }}" as="z" hint-placeholder-count="10">
+            <button onClick="{{ z.onClick }}" style="grid-area:{{ z.area }};display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;padding:6px;border:2px solid {{ z.border }};border-radius:3px;background:{{ z.bg }};color:{{ z.fg }};cursor:pointer;text-align:center;transition:transform .15s, background .2s;min-width:0" style-hover="transform:scale(1.02)">
+              <span style="font-family:'Space Mono',monospace;font-size:clamp(8.5px,1.4vw,11px);font-weight:700;letter-spacing:0.04em;text-transform:uppercase;line-height:1.2">{{ z.short }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <p style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.08em;margin:8px 2px 0;color:#4E3B2D">Schematic only · not to scale</p>
+      </div>
+      <div style="background:#2B1D14;color:#F5EEDF;border-radius:4px;padding:22px;display:flex;flex-direction:column;gap:10px;min-height:220px">
+        <span style="align-self:flex-start;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:{{ zoneActive.bg }};color:{{ zoneActive.fg }};padding:5px 9px;border-radius:2px">{{ zoneActive.type }}</span>
+        <p style="font-family:'Young Serif',serif;font-size:28px;line-height:1.1;margin:0">{{ zoneActive.name }}</p>
+        <p style="font-size:15px;line-height:1.6;margin:0">{{ zoneActive.desc }}</p>
+      </div>
+    </div>
+
+    <sc-for list="{{ boards }}" as="b" hint-placeholder-count="3">
+      <div style="margin-top:40px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <h3 style="font-family:'Young Serif',serif;font-weight:400;font-size:26px;margin:0">{{ b.title }}</h3>
+          <p style="font-size:14px;margin:0;color:#4E3B2D">{{ b.note }}</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ b.min }},1fr));gap:10px">
+          <sc-for list="{{ b.slots }}" as="s" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="aspect-ratio:{{ b.ratio }};border:1.5px dashed rgba(43,29,20,0.4);border-radius:4px;overflow:hidden;background:#FBF6EC">
+                <image-slot id="{{ s.id }}" src="{{ s.src }}" shape="rect" placeholder="{{ s.label }}"></image-slot>
+              </div>
+              <p style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:0">{{ s.label }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+
+    <div style="margin-top:40px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+        <h3 style="font-family:'Young Serif',serif;font-weight:400;font-size:26px;margin:0">Before &amp; after · construction</h3>
+        <p style="font-size:14px;margin:0;color:#4E3B2D">Drop the site photo on the left half, the finished photo on the right half.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px">
+        <sc-for list="{{ compares }}" as="c" hint-placeholder-count="2">
+          <div>
+            <div style="position:relative;aspect-ratio:4/3;border:1.5px solid #2B1D14;border-radius:4px;overflow:hidden;background:#FBF6EC">
+              <div style="position:absolute;inset:0"><image-slot id="{{ c.after }}" src="{{ c.afterSrc }}" shape="rect" placeholder="After"></image-slot></div>
+              <div style="position:absolute;inset:0;clip-path:{{ c.clip }}"><image-slot id="{{ c.before }}" src="{{ c.beforeSrc }}" shape="rect" placeholder="Before"></image-slot></div>
+              <div style="position:absolute;top:0;bottom:0;left:{{ c.pos }};width:3px;background:#D9A42B;transform:translateX(-1px);pointer-events:none"></div>
+              <span style="position:absolute;top:10px;left:10px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.1em;background:#2B1D14;color:#F5EEDF;padding:4px 8px;border-radius:2px;pointer-events:none">BEFORE</span>
+              <span style="position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:0.1em;background:#2F6B66;color:#F5EEDF;padding:4px 8px;border-radius:2px;pointer-events:none">AFTER</span>
+            </div>
+            <input type="range" min="5" max="95" value="{{ c.value }}" onInput="{{ c.onChange }}" onChange="{{ c.onChange }}" aria-label="Before and after" style="width:100%;accent-color:#B8432F;height:28px;margin-top:6px">
+            <p style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:0">{{ c.label }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:40px">
+      <h3 style="font-family:'Young Serif',serif;font-weight:400;font-size:26px;margin:0 0 12px">Videos &amp; reels</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+        <sc-for list="{{ videos }}" as="v" hint-placeholder-count="3">
+          <div style="aspect-ratio:9/12;border:1.5px dashed rgba(43,29,20,0.45);border-radius:4px;background:#2B1D14;color:#F5EEDF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center">
+            <span style="width:56px;height:56px;border-radius:50%;border:2px solid #D9A42B;display:flex;align-items:center;justify-content:center;font-size:20px;color:#D9A42B">▶</span>
+            <p style="font-family:'Young Serif',serif;font-size:20px;margin:0">{{ v.title }}</p>
+            <p style="font-size:13.5px;line-height:1.5;margin:0;opacity:0.85">Send the Facebook or TikTok link and it will be embedded here.</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { zone: 'window', cmp: {} };
+  renderVals() {
+    const B = '#2B1D14', C = '#F5EEDF', R = '#B8432F', M = '#D9A42B', T = '#2F6B66';
+    const types = { serve: ['Service', R, C], play: ['Play zone', M, B], chill: ['Seating', T, C], street: ['Street side', B, C] };
+    const Z = [
+      ['window', 'Kanto Window', 'Kanto Window', 'serve', 'Ordering counter styled as an upgraded sari-sari store window, with wooden grilles, hand-painted signage and candy jars.'],
+      ['silong', 'Silong + Let It Rip', 'The Silong · Let It Rip Stadium', 'play', 'Covered pavilion for rain and midday heat. Waist-high Beyblade stadiums with spectator rails sit under the awning.'],
+      ['lounge', 'Anime Lounge', 'The Saturday Morning Lounge', 'chill', 'Quiet, shaded lounge with floor cushions, papag and a wood-cabinet TV playing 90s anime.'],
+      ['pit', 'Pit Stop', 'The Pit Stop', 'play', 'Multi-lane Mini 4WD track with banked curves, lane-change bridge and pit table.'],
+      ['bakuran', 'Bakuran', 'The Bakuran', 'chill', 'Garden lawn with shade trees, potted plants, loose seating and barkada tables.'],
+      ['stage', 'Stage + Fire pit', 'Stage & fire pit', 'chill', 'Small bamboo stage for OPM Acoustic Fridays, with log seats around the fire pit.'],
+      ['hoops', 'Hoops', 'Kanto Hoops', 'play', 'Token arcade basketball near the street, the loudest and most social corner, with a weekly leaderboard.'],
+      ['crush', 'Crush Ring', 'The Crush Ring', 'play', 'Raised Crush Gear arena styled like a 90s TV tournament set; loud zone placed near the street.'],
+      ['bench', 'Tambayan Bench', 'The Tambayan Bench', 'chill', 'Long communal benches facing the street, the best people-watching seat.'],
+      ['street', 'Street / entrance', 'Street & entrance', 'street', 'Gate with the illuminated badge sign; loud zones sit on this side, quiet zones at the back.'],
+    ];
+    const zones = Z.map(([area, short, name, type]) => {
+      const on = this.state.zone === area, t = types[type];
+      return { area, short, bg: on ? B : (type === 'street' ? '#BFB197' : t[1]), fg: on ? C : (type === 'street' ? B : t[2]), border: on ? M : 'transparent', onClick: () => this.setState({ zone: area }) };
+    });
+    const az = Z.find(z => z[0] === this.state.zone);
+    const at = types[az[3]];
+    const zoneActive = { name: az[2], desc: az[4], type: at[0], bg: at[1], fg: at[2] };
+    const SRC = { 'mood-1': 'img/board/mood-1.jpg', 'mood-6': 'img/board/mood-6.jpg' };
+    ['mood-2','mood-3','mood-4','mood-5','merch-1','merch-2','merch-3','merch-4','merch-5','merch-6','sign-1','sign-2','sign-3'].forEach(k => { SRC[k] = 'img/board/' + k + 'b.jpg'; });
+    const mk = (prefix, labels) => labels.map((label, i) => { const id = prefix + '-' + (i + 1); return { id, label, src: SRC[id] || '' }; });
+    const boards = [
+      { title: 'Interior mood board', note: 'Textures, colors and spaces we like.', ratio: '1/1', min: 'min(100%,150px)', slots: mk('mood', ['Bamboo & nipa', 'String lights', 'Gravel & stepping stones', 'Bamboo seating', '90s memory wall', 'Garden at night']) },
+      { title: 'Staff uniform & merch', note: 'Tambay Crew look and items to sell.', ratio: '3/4', min: 'min(100%,150px)', slots: mk('merch', ['Barista apron', 'Crew shirt', 'Cap / bucket hat', 'Enamel mug', 'Pins & pog set', 'Tambay Card']) },
+      { title: 'Signage', note: 'Storefront, menu board and wayfinding.', ratio: '4/3', min: 'min(100%,220px)', slots: mk('sign', ['Storefront sign', 'Menu board', 'Zone wayfinding']) },
+    ];
+    const compares = ['Kanto Window build', 'Bakuran & Silong'].map((label, i) => {
+      const v = this.state.cmp[i] ?? 50;
+      return { label, value: v, pos: v + '%', clip: 'inset(0 ' + (100 - v) + '% 0 0)', before: 'before-' + (i + 1), after: 'after-' + (i + 1), beforeSrc: 'img/board/before-' + (i + 1) + 'b.jpg', afterSrc: i === 0 ? 'img/photos/area-kanto2.webp' : 'img/visuals/cafe-night.jpg',
+        onChange: e => { const n = Number(e.target.value); this.setState(s => ({ cmp: { ...s.cmp, [i]: n } })); } };
+    });
+    const videos = [{ title: 'Construction reel' }, { title: 'Tamiya race clip' }, { title: 'Opening teaser' }];
+    return { zones, zoneActive, boards, compares, videos };
+  }
+}
+</script>
+</body>
+</html>

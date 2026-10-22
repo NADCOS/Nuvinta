@@ -4,14 +4,15 @@
 
 ```
 index.html
+NuvintaPlan.dc.html
+NuvintaBoard.dc.html
+NuvintaGames.dc.html
 support.js
 image-slot.js
 nuvinta-tl.js
 README.md
-img/   (whole folder: logos, photos/, visuals/, mockups/)
+img/   (whole folder)
 ```
-
-The old `assets/` folder is no longer used — you can delete it from the repo.
 
 ## GitHub Pages
 Settings → Pages → Deploy from a branch → `main` / `(root)` → Save.
